@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Empleado</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Editar Empleado</h2>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <span th:text="${errorMessage}"></span>
+    </div>
+    <form th:action="@{'/editar_empleado/' + ${user.dni != null ? user.dni : dni}}" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombreEmpleado}" placeholder="Ingrese su nombre">
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" th:field="*{apellidoEmpleado}" placeholder="Ingrese su apellido">
+        </div>
+        <div class="form-group">
+            <label for="fechaNac">Fecha de Nacimiento:</label>
+            <input type="datetime-local" class="form-control" id="fechaNac" th:field="*{fechaNacimiento}" value="2024-1-141T08:30">
+        </div>
+        <div class="form-group">
+            <label for="direccion">Direccion:</label>
+            <input type="text" class="form-control" id="direccion" th:field="*{direccionEmpleado}" placeholder="Ingrese su direccion">
+        </div>
+        <div class="form-group">
+            <label for="correo">Correo:</label>
+            <input type="email" class="form-control" id="correo" th:field="*{correoEmpleado}" placeholder="Ingrese su direccion">
+        </div>
+        <div class="form-group">
+            <label for="area">Area:</label>
+            <input type="number" class="form-control" id="area" th:field="*{area}">
+        </div>
+
+        <a th:href="@{/}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+</div>
+</body>
+</html>

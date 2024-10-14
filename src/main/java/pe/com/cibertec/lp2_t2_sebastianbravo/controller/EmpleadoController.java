@@ -18,10 +18,11 @@ public class EmpleadoController {
 
     private final EmpleadoService empleadoService;
 
+    @GetMapping("/")
     public String index(Model model) {
         List<EmpleadoEntity> listarEmpleados = empleadoService.buscarEmpleados();
         model.addAttribute("list_empleado", listarEmpleados);
-        return "listar_empleados";
+        return "index";
     }
 
     @GetMapping("/detalle_empleado/{dni}")
@@ -50,7 +51,6 @@ public class EmpleadoController {
             model.addAttribute("user", user);
             return "registrar_empleado";
         }
-
         empleadoService.crearEmpleado(user);
         return "redirect:/";
     }
@@ -59,7 +59,7 @@ public class EmpleadoController {
     public String mostrarEditarEmpleado(@PathVariable("dni") String dni, Model model) {
         EmpleadoEntity empleadoEncontrado = empleadoService.buscarEmpleadoPorDni(dni);
         model.addAttribute("user", empleadoEncontrado);
-        return "editar_emplado";
+        return "editar_empleado";
     }
 
     @PostMapping("/editar_empleado/{dni}")
